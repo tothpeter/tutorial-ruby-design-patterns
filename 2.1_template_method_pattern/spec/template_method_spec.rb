@@ -13,7 +13,7 @@ describe "Template Method Pattern" do
   end
 
   context "Warrior" do
-    let(:hero) { Hero.new :warrior }
+    let(:hero) { Warrior.new }
     it "has default demage rating of 15" do
       expect(hero.damage).to eq(15)
     end
@@ -24,7 +24,7 @@ describe "Template Method Pattern" do
   end
 
   context "Mage" do
-    let(:hero) { Hero.new :mage }
+    let(:hero) { Mage.new }
     it "has default demage rating of 7" do
       expect(hero.damage).to eq(7)
     end
