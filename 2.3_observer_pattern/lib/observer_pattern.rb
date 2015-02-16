@@ -1,24 +1,25 @@
-module Observable
-  attr_reader :observers
+require "observer"
 
-  def initialize attrs = {}
-    @observers = []
-  end
+# module Observable
+#   attr_reader :observers
 
-  def add_observer observer
-    @observers << observer
-  end
+#   def initialize attrs = {}
+#     @observers = []
+#   end
 
-  def notify_observers
-    @observers.each { |observer| observer.update }
-  end
-end
+#   def add_observer observer
+#     @observers << observer
+#   end
+
+#   def notify_observers
+#     @observers.each { |observer| observer.update }
+#   end
+# end
 
 class Tile
   include Observable
 
   def initialize attrs = {}
-    super
     @cursed = attrs.fetch(:cursed, false)
   end
 
@@ -27,6 +28,7 @@ class Tile
   end
 
   def activate_curse
+    changed
     notify_observers
   end
 end
