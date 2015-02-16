@@ -14,6 +14,22 @@ describe "Observer Pattern" do
       # expect(hero).to be_cursed
     end
 
+    it "is cursed only when it is on a cursed tile" do
+      tile1 = Tile.new cursed: true
+      tile2 = Tile.new
+      
+      hero.discover tile1
+      tile1.activate_curse
+      tile2.activate_curse
+      expect(hero.health).to eq(6)
+
+      hero.discover tile2
+
+      tile1.activate_curse
+      tile2.activate_curse
+      expect(hero.health).to eq(6)
+    end
+
     it "is not cursed when discovers simple Tile without curse" do
       tile = Tile.new
       hero.discover tile

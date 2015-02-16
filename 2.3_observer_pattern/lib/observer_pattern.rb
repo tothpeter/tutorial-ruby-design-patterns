@@ -50,10 +50,17 @@ class Hero
   end
 
   def discover tile
+    if @tile
+      @tile.delete_observer self
+    end
+
+    @tile = tile
+
     if tile.cursed?
       @cursed = true
       tile.add_observer self
     end
+    
   end
 
   def update
