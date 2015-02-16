@@ -5,14 +5,23 @@ describe "Iterator Pattern" do
     let(:inventory) { Inventory.new }
 
     before :each do
-      item1 = Item.new
-      item1.cost = 20
+      @item1 = Item.new
+      @item1.cost = 20
 
-      item2 = Item.new
-      item2.cost = 10
+      @item2 = Item.new
+      @item2.cost = 10
 
-      inventory.add item1
-      inventory.add item2
+      inventory.add @item1
+      inventory.add @item2
+    end
+
+    it "provides the msot expensive item" do
+      expensive = Item.new
+      expensive.cost = 100
+      inventory.add expensive
+
+      expect(inventory.max).to eq(expensive)
+      expect(inventory.sort).to eq([@item2, @item1, expensive])
     end
 
     it "can be iterated through items to get total cost" do
