@@ -1,6 +1,29 @@
 require "command_pattern"
 
 describe "Command Pattern" do
+
+  describe "Undo" do
+    it "can be undone" do
+      hero = Hero.new
+      turn = Turn.new
+      wood = ChopWoodCommand.new hero
+      heal = HealCharacterCommand.new hero
+      money = GetMoneyCommand.new hero
+
+      turn.make_move wood
+      turn.make_move heal
+
+      expect(hero.wood).to eq 10
+      expect(hero.health).to eq 5
+
+      turn.undo_move
+      expect(hero.health).to eq 0
+
+      turn.undo_move
+      expect(hero.wood).to eq 0
+    end
+  end
+
   describe "Commands" do
 
     describe Reactor do
