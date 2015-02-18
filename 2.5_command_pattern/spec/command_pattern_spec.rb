@@ -2,6 +2,26 @@ require "command_pattern"
 
 describe "Command Pattern" do
   describe "Commands" do
+
+    describe Computer do
+      let(:computer) { Computer.new }
+
+      before :each do
+        computer.add(CalibrateDriverCommand.new)
+        computer.add(TestComplierCommand.new)
+      end
+
+      it "can add commands to its queue" do
+        expect(computer.queue.size).to eq(2)
+      end
+
+      it "executes all command in order" do
+        expect(computer.execute).to eq %Q{
+Calibrated Plutonium-Rod Driver
+Tested Jupiter Wave Compier
+}
+      end
+    end
     
     describe AmplifyShieldCommand do
       it "amplifies shield" do
