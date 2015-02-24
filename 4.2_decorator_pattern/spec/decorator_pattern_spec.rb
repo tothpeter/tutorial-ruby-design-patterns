@@ -6,37 +6,38 @@ describe "Decorator Pattern" do
     let(:common_item) { Item.new }
 
     context "magic masterpiece item" do
+      pending
       let(:full_item) { Item.new true, true }
       
       it "six times more expensive than common item" do
         expect(full_item.price).to eq common_item.price * 6
       end
 
-      it "has addition do descreption" do
+      it "has addition do description" do
         expect(full_item.description).to eq common_item.description + "Magic.Masterpiece."
       end
     end
 
     context "masterpiece item" do
-      let(:masterpiece_item) { Item.new false, true }
+      let(:masterpiece_item) { MasterpieceItemDecorator.new common_item }
       
       it "two times more expensive than common item" do
         expect(masterpiece_item.price).to eq common_item.price * 2
       end
 
-      it "has addition do descreption" do
+      it "has addition do description" do
         expect(masterpiece_item.description).to eq common_item.description + "Masterpiece."
       end
     end
 
     context "magic item" do
-      let(:magic_item) { Item.new true }
+      let(:magic_item) { MagicItemDecorator.new common_item }
       
       it "three times more expensive than common item" do
         expect(magic_item.price).to eq common_item.price * 3
       end
 
-      it "has addition do descreption" do
+      it "has addition do description" do
         expect(magic_item.description).to eq common_item.description + "Magic."
       end
     end
