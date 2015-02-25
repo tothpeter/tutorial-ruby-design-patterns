@@ -5,8 +5,14 @@ describe "Proxy Pattern" do
   it "delegates all functionality to the real object" do
     # Stub functions
     hero = Hero.new
+    
     computer = double("computer", queue: [], add: [], execute: true)
-    proxy = ComputerProxy.new computer, hero
+    # Old syntax
+    # Computer.stub(:new).and_return(computer)
+    # New
+    allow(Computer).to receive(:new).and_return(computer)
+
+    proxy = ComputerProxy.new hero
 
     expect(computer).to receive :add 
     proxy.add(double("command"))
